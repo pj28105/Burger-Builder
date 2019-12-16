@@ -17,7 +17,7 @@ const burger = props => {
           );
         });
     })
-    .reduce((accum, curr) => accum.concat(curr));
+    .flat(1);
     if(transformIngredients.length === 0){
         transformIngredients = <p>Please start adding ingredients!</p>
     }
