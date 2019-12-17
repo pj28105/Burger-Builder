@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import Burger from "../../components/Burger/Burger";
 import BuildContols from "../../components/Burger/BuildContols/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const INGREDIENTS_PRICE = {
   salad: 0.5,
@@ -20,7 +22,8 @@ class BurgerBuilder extends Component {
         cheese: 0,
         meat: 0
       },
-      price: 4.0
+      price: 4.0,
+      isPurchasing: false
     };
   }
 
@@ -51,6 +54,16 @@ class BurgerBuilder extends Component {
     });
   };
 
+  purchaseToggleHandler = () => {
+    this.setState(prevState => {
+      return { isPurchasing: !prevState.isPurchasing };
+    });
+  };
+
+  placeOrder = () => {
+    console.log("Order Placed");
+  };
+
   render() {
     const isDisable = { ...this.state.ingredients };
     let isPurchasable = false;
@@ -60,6 +73,13 @@ class BurgerBuilder extends Component {
     }
     return (
       <>
+        <Modal show={this.state.isPurchasing} hide={this.purchaseToggleHandler}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            cancel={this.purchaseToggleHandler}
+            placeOrder={this.placeOrder}
+          />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildContols
           more={this.addIngredientHandler}
@@ -67,6 +87,7 @@ class BurgerBuilder extends Component {
           isDisable={isDisable}
           price={this.state.price}
           isPurchasable={isPurchasable}
+          order={this.purchaseToggleHandler}
         />
       </>
     );
