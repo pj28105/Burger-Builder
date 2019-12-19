@@ -1,19 +1,10 @@
 import React from "react";
 
+import styles from "./BackDrop.module.css";
+
 const backDrop = props => {
   return props.show ? (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "fixed",
-        zIndex: "100",
-        left: 0,
-        top: "0",
-        backgroundColor: "rgba(0,0,0,0.5)"
-      }}
-      onClick={props.hide}
-    ></div>
+    <div className={styles.BackDrop} onClick={props.hide}></div>
   ) : null;
 };
 
