@@ -4,25 +4,20 @@ import BuildControl from "./BuildControl/BuildControl";
 import styles from "./BuildControls.module.css";
 
 const buildControls = props => {
-  const controls = [
-    { label: "Salad", type: "salad" },
-    { label: "Bacon", type: "bacon" },
-    { label: "Cheese", type: "cheese" },
-    { label: "Meat", type: "meat" }
-  ];
+  const labels = Object.keys(props.ingredients);
   return (
     <div className={styles.BuildControls}>
       <p>
         Current Price-: <strong>{props.price.toFixed(2)}</strong>
       </p>
-      {controls.map(control => {
+      {labels.map(label => {
         return (
           <BuildControl
-            key={control.label}
-            label={control.label}
-            more={() => props.more(control.type)}
-            less={() => props.less(control.type)}
-            isDisable={props.isDisable[control.type]}
+            key={label}
+            label={label}
+            more={() => props.more(label)}
+            less={() => props.less(label)}
+            isDisable={props.isDisable[label]}
           />
         );
       })}
