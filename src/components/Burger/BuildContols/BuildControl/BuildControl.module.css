@@ -35,6 +35,10 @@
     width: 80px;
 }
 
+.Label::first-letter{
+    text-transform: capitalize;
+}
+
 .BuildControl .Less {  
     background-color: #D39952;
     color: white;
